@@ -1,6 +1,7 @@
 import React from 'react';
 import CardItem from './CardsItem';
 import { Grid } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -22,6 +23,7 @@ const Cards = ({ items, isLoading }) => {
       <Grid container direction='column'>
         <Grid item container>
           <Grid item xs={false} sm={1} />
+
           <Grid item xs={12} sm={10}>
             <Grid container spacing={2} className={classes.cardContainer}>
               {items.map((item) => (

@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Cards from './Components/Cards';
+import React, { Fragment } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Landing from './layout/Landing';
+import Launch from './layout/Launch';
+import Land from './layout/Land';
+
+import CardRequest from './Components/CardRequest';
 
 const useStyles = makeStyles({
   SpaceXContainer: {
@@ -17,35 +21,26 @@ const useStyles = makeStyles({
 });
 
 const App = () => {
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      const result = await axios(
-        `https://api.spaceXdata.com/v3/launches?limit=100`
-      );
-
-      console.log(result.data);
-      setItems(result.data);
-      setIsLoading(false);
-    };
-    fetchItems();
-  }, []);
-
   return (
-    <div>
-      <AppBar position='static'>
-        <Toolbar>
-          <Typography variant='h6' className={classes.title}>
-            SpaceX
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Cards isLoading={isLoading} items={items} />
-    </div>
+    <Router>
+      <Fragment>
+        <AppBar position='static'>
+          <Toolbar>
+            <Typography variant='h6' className={classes.title}>
+              SpaceX
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Route exact path='/' component={CardRequest} />
+        <Switch>
+          <Route exact path='/landing/:id' component={Landing} />
+          <Route exact path='/launch/:id' component={Launch} />
+          <Route exact path='/land/:id' component={Land} />
+        </Switch>
+      </Fragment>
+    </Router>
   );
 };
 
