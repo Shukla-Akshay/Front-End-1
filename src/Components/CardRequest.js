@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 const CardRequest = () => {
